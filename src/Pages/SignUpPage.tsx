@@ -1,5 +1,5 @@
-import * as React from 'react'
-import 'tailwindcss/tailwind.css'
+import * as React from "react";
+import "tailwindcss/tailwind.css";
 
 function SignUpPage() {
   // const handleSubmit = () => {
@@ -57,7 +57,7 @@ function SignUpPage() {
               <div className="text-center p-10">
                 <button
                   type="button"
-                  className="inline-block w-full px-7 py-3 bg-webtn text-white font-medium text-sm leading-snug uppercase rounded-full shadow-md hover:bg-hoverWebtn hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="inline-block w-full px-7 py-3 bg-webtn text-white font-medium text-sm leading-snug uppercase rounded-full shadow-md focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg transition duration-150 ease-in-out"
                 >
                   Sign up
                 </button>
@@ -67,7 +67,7 @@ function SignUpPage() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default SignUpPage
+export default SignUpPage;

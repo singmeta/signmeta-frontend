@@ -1,5 +1,5 @@
-import * as React from 'react'
-import 'tailwindcss/tailwind.css'
+import * as React from "react";
+import "tailwindcss/tailwind.css";
 
 function LoginPage() {
   // const handleSubmit = () => {
@@ -36,19 +36,19 @@ function LoginPage() {
               <div className="text-center p-10">
                 <button
                   type="button"
-                  className="inline-block w-full px-7 py-3 bg-webtn text-white font-medium text-sm leading-snug uppercase rounded-full shadow-md hover:bg-hoverWebtn hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="inline-block w-full px-7 py-3 bg-webtn text-white font-medium text-sm leading-snug uppercase rounded-full shadow-md focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg transition duration-150 ease-in-out"
                 >
                   Login
                 </button>
                 <button
                   type="button"
-                  className="bg-gradient-to-r from-cyan-500 to-blue-500 inline-block w-full mt-4 px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="bg-gradient-to-r from-cyan-500 to-blue-500 inline-block w-full mt-4 px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded-full shadow-md  hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out"
                 >
                   google login
                 </button>
 
                 <p className="text-sm font-semibold mt-7 pt-1 mb-0">
-                  <a href="#!" className="text-neutral-400">
+                  <a href="/signup" className="text-neutral-400">
                     아직 회원이 아니신가요?
                   </a>
                 </p>
@@ -63,7 +63,7 @@ function LoginPage() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;
