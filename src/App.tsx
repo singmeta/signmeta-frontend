@@ -6,6 +6,7 @@ import SignUpPage from "./Pages/SignUpPage";
 import MainPage from "./Pages/MainPage";
 import RoomListPage from "./Pages/RoomListPage";
 import WebView from "./Pages/WebView";
+import RoomCreatePage from "./Pages/RoomCreatePage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/mainpage" element={<MainPage />} />
           <Route path="/roomlist" element={<RoomListPage />} />
           <Route path="/webview" element={<WebView />} />
+          <Route path="/roomcreatepage" element={<RoomCreatePage />} />
         </Routes>
       </Router>
     </div>
