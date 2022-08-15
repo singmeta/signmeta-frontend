@@ -1,0 +1,22 @@
+import * as React from "react";
+import "tailwindcss/tailwind.css";
+
+function RoomDetail() {
+  // const handleSubmit = () => {
+  //   console.log('button active')
+  // }
+
+  return (
+    <div className="flex flex-col h-fit w-fit my-auto items-center m-auto">
+      <button>
+        <a href="/webview">
+          <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />
+        </a>
+      </button>
+      <span>방구석노엘</span>
+      <span>99/100</span>
+    </div>
+  );
+}
+
+export default RoomDetail;

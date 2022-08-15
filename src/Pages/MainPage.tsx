@@ -42,7 +42,7 @@ function MainPage() {
             </button>
             <button className="col-start-1 col-span-1 ..."></button>
             <button className="col-end-7 col-span-1 ... m-auto">
-              <a href="/signup" className="text-neutral-400">
+              <a href="/roomlist" className="text-neutral-400">
                 <img src="https://i.imgur.com/J73mp5N.png" alt="room" />
               </a>
             </button>
