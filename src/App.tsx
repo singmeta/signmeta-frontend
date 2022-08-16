@@ -18,7 +18,7 @@ function App() {
           <Route path="/mainpage" element={<MainPage />} />
           <Route path="/roomlist" element={<RoomListPage />} />
           <Route path="/webview" element={<WebView />} />
-          <Route path="/roomcreatepage" element={<RoomCreatePage />} />
+          <Route path="/roomcreate" element={<RoomCreatePage />} />
         </Routes>
       </Router>
     </div>
