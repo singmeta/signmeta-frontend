@@ -1,5 +1,12 @@
 import * as React from "react";
 import "tailwindcss/tailwind.css";
+import { useState } from "react";
+
+import { Swiper, SwiperSlide } from "swiper/react"; // basic
+import SwiperCore, { Navigation, Scrollbar, Pagination } from "swiper";
+import "swiper/css"; //basic
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 function RoomCreatePage() {
   // const handleSubmit = () => {
@@ -19,17 +26,35 @@ function RoomCreatePage() {
   // const onRemove = (item) => {
   //   setCheckedList(checkedList.filter((el) => el !== item));
   // };
-  const [roomName, setRoomName] = React.useState("");
-  const [peopleNum, setPeopleNum] = React.useState("4");
-  const [roomPW, setRoomPW] = React.useState("");
 
-  const [checkedPW, setCheckedPW] = React.useState(false);
+  const [roomName, setRoomName] = useState("");
+  const [peopleNum, setPeopleNum] = useState("4");
+  const [roomPW, setRoomPW] = useState("");
+  const [roomTheme, setRoomTheme] = useState("1");
+
+  const [checkedPW, setCheckedPW] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(roomName, "roomName  ~~~");
-    console.log(peopleNum, "peopleNum ~~~");
-    console.log(roomPW, "roomPW ~~~~~");
+    if (checkedPW) {
+      if (roomName !== "" && peopleNum !== "" && roomPW !== "") {
+        console.log(roomName, "roomName  ~~~");
+        console.log(peopleNum, "peopleNum ~~~");
+        console.log(roomPW, "roomPW ~~~~~");
+        console.log(roomTheme, "roomTheme~~~~~");
+      } else {
+        alert("모든 항목을 작성해주세요!");
+      }
+    } else {
+      if (roomName !== "" && peopleNum !== "") {
+        console.log(roomName, "roomName  ~~~");
+        console.log(peopleNum, "peopleNum ~~~");
+        console.log(roomTheme, "roomTheme~~~~~");
+      } else {
+        alert("모든 항목을 작성해주세요!");
+      }
+    }
+    //여기서 포스트로 넘기면 된다.
   };
 
   const handleChecked = (e: any) => {
@@ -38,6 +63,19 @@ function RoomCreatePage() {
     if (e.target.checked === false) {
       setRoomPW("");
     }
+  };
+
+  SwiperCore.use([Navigation, Pagination, Scrollbar]);
+
+  const settings = {
+    spaceBetween: 10,
+    navigation: {},
+    pagination: { clickable: true },
+    scrollbar: { draggable: true, el: null },
+    slidesPerView: 1,
+    onSlideChange: (swiper: any) => {
+      setRoomTheme(swiper.activeIndex); //테마 설정
+    },
   };
 
   return (
@@ -51,6 +89,21 @@ function RoomCreatePage() {
                   노래방 환경을 선택해주세요
                 </p>
               </div>
+              <Swiper {...settings} className="flex justify-center m-10">
+                <SwiperSlide className="flex justify-center">
+                  <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />1
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center">
+                  <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />2
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center">
+                  <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />3
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center pb-10">
+                  <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />4
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center">5</SwiperSlide>
+              </Swiper>
 
               <div className="mb-6 ">
                 <p className="text-sm font-semibold mb-1 ml-1">방 제목</p>
