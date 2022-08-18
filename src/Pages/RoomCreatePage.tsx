@@ -19,13 +19,33 @@ function RoomCreatePage() {
   // const onRemove = (item) => {
   //   setCheckedList(checkedList.filter((el) => el !== item));
   // };
+  const [roomName, setRoomName] = React.useState("");
+  const [peopleNum, setPeopleNum] = React.useState("4");
+  const [roomPW, setRoomPW] = React.useState("");
+
+  const [checkedPW, setCheckedPW] = React.useState(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(roomName, "roomName  ~~~");
+    console.log(peopleNum, "peopleNum ~~~");
+    console.log(roomPW, "roomPW ~~~~~");
+  };
+
+  const handleChecked = (e: any) => {
+    console.log(e.target.checked);
+    setCheckedPW(e.target.checked);
+    if (e.target.checked === false) {
+      setRoomPW("");
+    }
+  };
 
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="flex flex-col items-center justify-center lg:justify-start mb-10">
                 <p className="text-4xl font-semibold mb-10">
                   노래방 환경을 선택해주세요
@@ -36,7 +56,8 @@ function RoomCreatePage() {
                 <p className="text-sm font-semibold mb-1 ml-1">방 제목</p>
                 <input
                   type="text"
-                  className="shadow-md form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"
+                  onChange={(e) => setRoomName(e.target.value)}
+                  className="shadow-md form-control block w-full px-4 py-2 text-ms font-normal text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"
                   id="roomName"
                 />
               </div>
@@ -48,10 +69,12 @@ function RoomCreatePage() {
                 <select
                   id="peopleNum"
                   className="shadow-md form-control block w-full px-4 py-2 text-xl font-normal text-base text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"
+                  onChange={(e) => setPeopleNum(e.target.value)}
                 >
-                  <option selected value="4">
-                    4명
+                  <option value="default" disabled>
+                    Choose a Your Standerd...
                   </option>
+                  <option value="4">4명</option>
                   <option value="5">5명</option>
                   <option value="6">6명</option>
                   <option value="7">7명</option>
@@ -65,20 +88,25 @@ function RoomCreatePage() {
                   <input
                     id="default-checkbox"
                     type="checkbox"
-                    value=""
-                    className="ml-3 w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-gray-200 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    onClick={handleChecked}
+                    className="ml-3 w-4 h-4 bg-gray-100 rounded border-gray-500 accent-slate-50 focus:accent-slate-500"
                   />
                 </p>
-                <input
-                  type="text"
-                  className="shadow-md form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"
-                  id="nickname"
-                />
+                {checkedPW ? (
+                  <input
+                    type="password"
+                    className="shadow-md form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"
+                    id="roomPW"
+                    onChange={(e) => setRoomPW(e.target.value)}
+                  />
+                ) : (
+                  undefined
+                )}
               </div>
 
               <div className="text-center p-10">
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-block w-full px-7 py-3 bg-webtn text-white font-medium text-sm leading-snug uppercase rounded-full hover:bg-hoverWebtn focus:bg-hoverWebtn active:bg-hoverWebtn transition duration-150 ease-out hover:-translate-y-1 hover:scale-110 duration-300"
                 >
                   완료
