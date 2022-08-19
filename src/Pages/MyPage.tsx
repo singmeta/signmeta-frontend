@@ -9,7 +9,7 @@ function MyPage() {
 
   return (
     <section className="h-screen ">
-      <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
+      <div className="flex justify-center justify-center items-center flex-wrap h-full g-6">
         <div className="xl:w-7/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0 border-2 w-96 h-96">
           <div className="flex justify-between">
             <span className="text-xl text-slate-400 m-5 font-bold">
@@ -27,15 +27,25 @@ function MyPage() {
             </div>
 
             <div className="col-span-2 row-span-2 flex flex-col">
-              <div className="text-xl">인기순 / 최신순</div>
-              <div>
-                <button>►</button>
-                <span>title</span>
+              <div className="text-xl ml-3">인기순 / 최신순</div>
+              {/* 이거 map으로 돌려  components로 따로 ㄷ뺴야할듯*/}
+              <div className="flex space-x-4 p-2">
+                <button className="pb-2"> ► </button>
+                <p className="truncate">
+                  어떻게 이별까지 사랑하겠어 어떻게 이별까지 사랑하겠어 어떻게
+                  이별까지 사랑하겠어
+                </p>
                 <span>nickname</span>
                 <span>playtime</span>
                 <span>date</span>
-                <button>upload</button>
+                <button
+                  type="button"
+                  className="p-1 bg-webtn text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg"
+                >
+                  upload
+                </button>
               </div>
+
               <div>1</div>
               <div>1</div>
               <div>1</div>
