@@ -1,7 +1,6 @@
 import MyMusicDetail from "components/myMusicDetail";
 import * as React from "react";
 import "tailwindcss/tailwind.css";
-import RoomDetail from "../components/roomDetail";
 
 function MyPage() {
   // const handleSubmit = () => {
@@ -30,11 +29,18 @@ function MyPage() {
             <div className="col-span-2 row-span-2 flex flex-col">
               <div className="text-xl ml-3">인기순 / 최신순</div>
               {/* 이거 map으로 돌려  components로 따로 ㄷ뺴야할듯*/}
-              <MyMusicDetail />
-              <MyMusicDetail />
-              <MyMusicDetail />
-              <MyMusicDetail />
-              <MyMusicDetail />
+              <div className="overflow-y-auto h-52">
+                <MyMusicDetail />
+                <MyMusicDetail />
+                <MyMusicDetail />
+                <MyMusicDetail />
+                <MyMusicDetail />
+                <MyMusicDetail />
+                <MyMusicDetail />
+                <MyMusicDetail />
+                <MyMusicDetail />
+                <MyMusicDetail />
+              </div>
             </div>
           </div>
           <div className="flex flex-row-reverse">

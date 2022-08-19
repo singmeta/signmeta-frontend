@@ -9,7 +9,7 @@ function MyMusicDetail() {
   return (
     <div className="flex justify-evenly space-x-4 p-2 text-gray-500">
       <div>
-        <button className="">
+        <button>
           <img className="max-w-max" src="images/playicon.png" alt="img"></img>
         </button>
       </div>
