@@ -26,8 +26,10 @@ function MainPage() {
               exit
             </button>
             <button className="col-start-1 col-span-1 ... m-auto text-white">
-              <img src="https://i.imgur.com/xvXJoPm.png" alt="" />
-              playlist
+              <a href="/playlistpage">
+                <img src="https://i.imgur.com/xvXJoPm.png" alt="" />
+                playlist
+              </a>
             </button>
             <button className="col-end-5 row-span-2 col-span-2 ... m-auto">
               <img src="https://i.imgur.com/WkuQGWl.png" alt="character" />
@@ -37,12 +39,14 @@ function MainPage() {
               <span>chart</span>
             </button>
             <button className="col-start-1 col-span-1 ... m-auto text-white">
-              <img src="https://i.imgur.com/oI7F4hZ.png" alt="" />
-              mypage
+              <a href="/mypage">
+                <img src="https://i.imgur.com/oI7F4hZ.png" alt="" />
+                mypage
+              </a>
             </button>
             <button className="col-start-1 col-span-1 ..."></button>
             <button className="col-end-7 col-span-1 ... m-auto">
-              <a href="/roomlist" className="text-neutral-400">
+              <a href="/roomlist">
                 <img src="https://i.imgur.com/J73mp5N.png" alt="room" />
               </a>
             </button>

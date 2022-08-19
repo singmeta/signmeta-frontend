@@ -29,7 +29,7 @@ function MyPage() {
             <div className="col-span-2 row-span-2 flex flex-col">
               <div className="text-xl ml-3">인기순 / 최신순</div>
               {/* 이거 map으로 돌려  components로 따로 ㄷ뺴야할듯*/}
-              <div className="overflow-y-auto h-52">
+              <div className="overflow-y-auto h-52 mt-2">
                 <MyMusicDetail />
                 <MyMusicDetail />
                 <MyMusicDetail />
