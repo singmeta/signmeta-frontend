@@ -2,10 +2,26 @@ import ChartDetail from "components/chartDetail";
 import * as React from "react";
 import "tailwindcss/tailwind.css";
 
+import { Swiper, SwiperSlide } from "swiper/react"; // basic
+import SwiperCore, { Navigation, Scrollbar, Pagination } from "swiper";
+import "swiper/css"; //basic
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 function ChartPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+
+  SwiperCore.use([Navigation, Pagination, Scrollbar]);
+
+  const settings = {
+    spaceBetween: 10,
+    navigation: {},
+    pagination: { clickable: true },
+    scrollbar: { draggable: true, el: null },
+    slidesPerView: 5,
+  };
 
   return (
     <section className="h-screen ">
@@ -25,13 +41,40 @@ function ChartPage() {
             </button>
           </div>
 
-          <div className="grid grid-cols-5 gap-4">
-            <ChartDetail />
-            <ChartDetail />
-            <ChartDetail />
+          <Swiper {...settings} className="flex justify-center m-10">
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+            <SwiperSlide className="flex justify-center pb-10">
+              <ChartDetail />
+            </SwiperSlide>
+          </Swiper>
 
-            {/* 컴포넌트 등록해서 map으로 돌려 (data : 1. 이미지 2. 닉네임 3. 참여 인원 ) */}
-          </div>
+          {/* 컴포넌트 등록해서 map으로 돌려 (data : 1. 이미지 2. 닉네임 3. 참여 인원 ) */}
         </div>
       </div>
     </section>

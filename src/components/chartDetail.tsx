@@ -8,6 +8,7 @@ function ChartDetail() {
 
   return (
     <div className="flex flex-col h-fit w-fit my-auto items-center m-auto">
+      1st
       <button>
         <a href="/webview">
           <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />
