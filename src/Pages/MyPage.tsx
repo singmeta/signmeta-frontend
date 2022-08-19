@@ -29,15 +29,31 @@ function MyPage() {
             <div className="col-span-2 row-span-2 flex flex-col">
               <div className="text-xl ml-3">인기순 / 최신순</div>
               {/* 이거 map으로 돌려  components로 따로 ㄷ뺴야할듯*/}
-              <div className="flex space-x-4 p-2">
-                <button className="pb-2"> ► </button>
-                <p className="truncate">
-                  어떻게 이별까지 사랑하겠어 어떻게 이별까지 사랑하겠어 어떻게
-                  이별까지 사랑하겠어
-                </p>
-                <span>nickname</span>
-                <span>playtime</span>
-                <span>date</span>
+              <div className="flex justify-evenly space-x-4 p-2 text-gray-500">
+                <div>
+                  <button className="">
+                    <img
+                      className="max-w-max"
+                      src="images/playicon.png"
+                      alt="img"
+                    ></img>
+                  </button>
+                </div>
+                <div className="truncate">
+                  <p className="truncate">
+                    어떻게 이별까지 사랑하겠어 어떻게 이별까지 사랑하겠어 어떻게
+                    이별까지 사랑하겠어
+                  </p>
+                </div>
+                <div>
+                  <span>nickname</span>
+                </div>
+                <div>
+                  <span>playtime</span>
+                </div>
+                <div>
+                  <p className="truncate">22-08-19</p>
+                </div>
                 <button
                   type="button"
                   className="p-1 bg-webtn text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg"
