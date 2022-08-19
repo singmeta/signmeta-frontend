@@ -90,13 +90,13 @@ function RoomCreatePage() {
                 </p>
               </div>
               <Swiper {...settings} className="flex justify-center m-10">
-                <SwiperSlide className="flex justify-center">
-                  <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />1
+                <SwiperSlide className="flex justify-center pb-10">
+                  <img src="https://i.imgur.com/nbOmV01.png" alt="charimg " />
                 </SwiperSlide>
-                <SwiperSlide className="flex justify-center">
+                <SwiperSlide className="flex justify-center pb-10">
                   <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />2
                 </SwiperSlide>
-                <SwiperSlide className="flex justify-center">
+                <SwiperSlide className="flex justify-center pb-10">
                   <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />3
                 </SwiperSlide>
                 <SwiperSlide className="flex justify-center pb-10">
