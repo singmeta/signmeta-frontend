@@ -35,8 +35,10 @@ function MainPage() {
               <img src="https://i.imgur.com/WkuQGWl.png" alt="character" />
             </button>
             <button className="col-end-7 col-span-1 ... m-auto  text-white">
-              <img src="https://i.imgur.com/YEH2xPE.png" alt="" />
-              <span>chart</span>
+              <a href="/chartpage">
+                <img src="https://i.imgur.com/YEH2xPE.png" alt="" />
+                chart
+              </a>
             </button>
             <button className="col-start-1 col-span-1 ... m-auto text-white">
               <a href="/mypage">

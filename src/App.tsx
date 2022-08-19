@@ -9,6 +9,7 @@ import WebView from "./Pages/WebView";
 import RoomCreatePage from "./Pages/RoomCreatePage";
 import MyPage from "Pages/MyPage";
 import PlaylistPage from "Pages/PlaylistPage";
+import ChartPage from "Pages/ChartPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/roomcreate" element={<RoomCreatePage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/playlistpage" element={<PlaylistPage />} />
+          <Route path="/chartpage" element={<ChartPage />} />
         </Routes>
       </Router>
     </div>
