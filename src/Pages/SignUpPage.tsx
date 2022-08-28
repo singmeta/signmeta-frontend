@@ -2,6 +2,8 @@ import * as React from "react";
 import "tailwindcss/tailwind.css";
 import Api from "../modules/customApi";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface User {
   email: FormDataEntryValue | null;
@@ -11,16 +13,18 @@ interface User {
 }
 
 function SignUpPage() {
+  const navigate = useNavigate();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const data = new FormData(e.currentTarget);
+    const data1 = new FormData(e.currentTarget);
 
     const user: User = {
-      email: data.get("email"),
-      password: data.get("password"),
-      nickname: data.get("nickname"),
-      phone: data.get("phone"),
+      email: data1.get("email"),
+      password: data1.get("password"),
+      nickname: data1.get("nickname"),
+      phone: data1.get("phone"),
     };
     console.log(user);
 
@@ -30,9 +34,11 @@ function SignUpPage() {
       user.nickname !== "" &&
       user.phone !== ""
     ) {
-      Api.post<User>(`/users/register`, user)
+      axios
+        .post<User>(`/users/register`, user)
         .then((response) => {
           console.log("complete!!");
+          navigate(`/mainpage`);
         })
         .catch((error) => {
           console.log("An error occurred : ", error.response);
