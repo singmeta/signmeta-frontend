@@ -1,17 +1,55 @@
 import * as React from "react";
 import "tailwindcss/tailwind.css";
+import Api from "../modules/customApi";
+import { useState } from "react";
+
+interface User {
+  email: FormDataEntryValue | null;
+  password: FormDataEntryValue | null;
+  nickname: FormDataEntryValue | null;
+  phone: FormDataEntryValue | null;
+}
 
 function SignUpPage() {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const data = new FormData(e.currentTarget);
+
+    const user: User = {
+      email: data.get("email"),
+      password: data.get("password"),
+      nickname: data.get("nickname"),
+      phone: data.get("phone"),
+    };
+    console.log(user);
+
+    if (
+      user.email !== "" &&
+      user.password !== "" &&
+      user.nickname !== "" &&
+      user.phone !== ""
+    ) {
+      Api.post<User>(`/users/register`, user)
+        .then((response) => {
+          console.log("complete!!");
+        })
+        .catch((error) => {
+          console.log("An error occurred : ", error.response);
+        });
+    } else {
+      alert("모든 항목을 작성해주세요");
+    }
+  };
+
+  const [userEmail, setUserEmail] = useState("");
 
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="flex flex-col items-center justify-center lg:justify-start mb-10">
                 <p className="text-4xl font-semibold mb-10">JOIN US!!!</p>
               </div>
@@ -20,8 +58,9 @@ function SignUpPage() {
                 <p className="text-sm font-semibold mb-1 ml-1">Email</p>
                 <input
                   type="text"
+                  name="email"
+                  onChange={(e) => setUserEmail(e.target.value)}
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="email"
                   placeholder="Email address"
                 />
               </div>
@@ -31,7 +70,7 @@ function SignUpPage() {
                 <input
                   type="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="password"
+                  name="password"
                   placeholder="Password"
                 />
               </div>
@@ -41,7 +80,7 @@ function SignUpPage() {
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="nickname"
+                  name="nickname"
                 />
               </div>
 
@@ -50,13 +89,13 @@ function SignUpPage() {
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="phoneNumber"
+                  name="phone"
                 />
               </div>
 
               <div className="text-center p-10">
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-block w-full px-7 py-3 bg-webtn text-white font-medium text-sm leading-snug uppercase rounded-full shadow-md focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg transition duration-150 ease-in-out"
                 >
                   Sign up

@@ -1,3 +1,4 @@
+import ButterBtn from "components/TestBtn";
 import * as React from "react";
 import "tailwindcss/tailwind.css";
 
@@ -46,7 +47,7 @@ function LoginPage() {
                 >
                   google login
                 </button>
-
+                {/* <ButterBtn props={"rlahWL"} /> */}
                 <p className="text-sm font-semibold mt-7 pt-1 mb-0">
                   <a href="/signup" className="text-neutral-400">
                     아직 회원이 아니신가요?
