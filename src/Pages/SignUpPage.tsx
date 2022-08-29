@@ -1,6 +1,5 @@
 import * as React from "react";
 import "tailwindcss/tailwind.css";
-import Api from "../modules/customApi";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +37,7 @@ function SignUpPage() {
         .post<User>(`/users/register`, user)
         .then((response) => {
           console.log("complete!!");
-          navigate(`/mainpage`);
+          navigate(`/`);
         })
         .catch((error) => {
           console.log("An error occurred : ", error.response);
