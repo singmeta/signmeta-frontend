@@ -1,11 +1,17 @@
 import * as React from "react";
 import "tailwindcss/tailwind.css";
 import Profile1 from "../images/profile1";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function MainPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+  const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
+  useEffect(() => {
+    console.log(REDUX_USER_ID);
+  });
 
   return (
     <section className="h-screen ">
