@@ -8,7 +8,10 @@ function MyMusicDetail({
   is_showed = "",
   created_at = "",
   music_id = "",
+  music_url = "",
 }) {
+  console.log(music_url);
+
   const handleUpload = () => {
     if (is_showed) {
       // true >> 업로드 o

@@ -4,11 +4,14 @@ import "tailwindcss/tailwind.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import AudioPlayer from "components/audioPlayer";
 
 function MyPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+  const [userNickname, setUserNickname] = useState("");
+
   const [userMusicArray, setUserMusicArray] = useState<any[]>([]);
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
   console.log(REDUX_USER_ID);
@@ -16,13 +19,21 @@ function MyPage() {
   useEffect(() => {
     PopularMusicList();
     //LatestMusicList();
+    axios
+      .get(`/users/${REDUX_USER_ID}`)
+      .then((response) => {
+        setUserNickname(response.data.user.nickname);
+        //여기서 닉네임이랑 이미지 가져와야함
+      })
+      .catch((error) => {
+        console.log("An error occurred : ", error.response);
+      });
   }, [REDUX_USER_ID]);
 
   const PopularMusicList = () => {
     axios
       .get(`/user-musics/users/${REDUX_USER_ID}/popular`)
       .then((response) => {
-        console.log(response.data.userMusic[0].title);
         setUserMusicArray(response.data.userMusic);
       })
       .catch((error) => {
@@ -56,7 +67,7 @@ function MyPage() {
           </div>
           <div className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-2">
             <div className="row-span-2 mx-auto text-center">
-              <span className="text-lg font-bold">nickname</span>
+              <span className="text-lg font-bold">{userNickname}</span>
               <img className="" src="images/mypageimg.png" alt="img"></img>
               <span className="text-base">캐릭터 변경</span>
             </div>
@@ -74,6 +85,7 @@ function MyPage() {
                     is_showed={item.is_showed}
                     created_at={item.created_at}
                     music_id={item._id}
+                    music_url={item.record_url}
                     key={index}
                   />
                 ))}
@@ -88,6 +100,7 @@ function MyPage() {
               <a href="/">뒤로가기</a>
             </button>
           </div>
+          <AudioPlayer />
         </div>
       </div>
     </section>
