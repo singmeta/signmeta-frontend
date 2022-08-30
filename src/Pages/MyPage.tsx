@@ -1,11 +1,46 @@
 import MyMusicDetail from "components/myMusicDetail";
 import * as React from "react";
 import "tailwindcss/tailwind.css";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function MyPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+  const [userMusicArray, setUserMusicArray] = useState<any[]>([]);
+  const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
+  console.log(REDUX_USER_ID);
+
+  useEffect(() => {
+    PopularMusicList();
+    //LatestMusicList();
+  }, [REDUX_USER_ID]);
+
+  const PopularMusicList = () => {
+    axios
+      .get(`/user-musics/users/${REDUX_USER_ID}/popular`)
+      .then((response) => {
+        console.log(response.data.userMusic[0].title);
+        setUserMusicArray(response.data.userMusic);
+      })
+      .catch((error) => {
+        console.log("An error occurred : ", error.response);
+      });
+  };
+
+  const LatestMusicList = () => {
+    axios
+      .get(`/user-musics/users/${REDUX_USER_ID}/latest`)
+      .then((response) => {
+        console.log(response.data.userMusic[0].title);
+        setUserMusicArray(response.data.userMusic);
+      })
+      .catch((error) => {
+        console.log("An error occurred : ", error.response);
+      });
+  };
 
   return (
     <section className="h-screen ">
@@ -27,19 +62,21 @@ function MyPage() {
             </div>
 
             <div className="col-span-2 row-span-2 flex flex-col">
-              <div className="text-xl ml-3">인기순 / 최신순</div>
+              <div className="text-xl ml-3">
+                <button onClick={PopularMusicList}>인기순 </button>/{" "}
+                <button onClick={LatestMusicList}>최신순</button>
+              </div>
               {/* 이거 map으로 돌려  components로 따로 ㄷ뺴야할듯*/}
               <div className="overflow-y-auto h-52 mt-2">
-                <MyMusicDetail />
-                <MyMusicDetail />
-                <MyMusicDetail />
-                <MyMusicDetail />
-                <MyMusicDetail />
-                <MyMusicDetail />
-                <MyMusicDetail />
-                <MyMusicDetail />
-                <MyMusicDetail />
-                <MyMusicDetail />
+                {Object.values(userMusicArray)?.map((item: any, index: any) => (
+                  <MyMusicDetail
+                    title={item.title}
+                    is_showed={item.is_showed}
+                    created_at={item.created_at}
+                    music_id={item._id}
+                    key={index}
+                  />
+                ))}
               </div>
             </div>
           </div>

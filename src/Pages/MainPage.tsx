@@ -8,10 +8,9 @@ function MainPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
-  useEffect(() => {
-    console.log(REDUX_USER_ID);
-  });
+  console.log(REDUX_USER_ID);
 
   return (
     <section className="h-screen ">

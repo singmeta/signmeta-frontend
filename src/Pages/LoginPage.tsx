@@ -3,7 +3,7 @@ import "tailwindcss/tailwind.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { save_id } from "actions";
+import { save_id } from "../actions/UserIDAction";
 
 interface LoginInfo {
   email: FormDataEntryValue | null;
@@ -33,7 +33,7 @@ function LoginPage() {
         .then((response) => {
           console.log("complete!!");
           console.log(response.data);
-          console.log(response.data.userId); //이거 전역관리 630cd41b06fbcf281d29fc02
+          console.log(response.data.userId); //이거 전역관리 630cd41b06fbcf281d29fc02 // origin 630db68306fbcf281d29fc34
           if (response.data.success === true) {
             dispatch(save_id(response.data.userId));
             navigate(`/mainpage`);
