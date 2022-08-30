@@ -1,7 +1,9 @@
 import axios from "axios";
-import * as React from "react";
+import React, { useRef, useState } from "react";
 import "tailwindcss/tailwind.css";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { save_url } from "actions/MusicUrlAction";
 
 function MyMusicDetail({
   title = "",
@@ -10,8 +12,11 @@ function MyMusicDetail({
   music_id = "",
   music_url = "",
 }) {
-  console.log(music_url);
-
+  const handlePlaylist = () => {
+    localStorage.setItem("select_music", music_url);
+    localStorage.setItem("select_title", title);
+    window.location.reload();
+  };
   const handleUpload = () => {
     if (is_showed) {
       // true >> 업로드 o
@@ -42,7 +47,7 @@ function MyMusicDetail({
   return (
     <div className="flex justify-evenly space-x-4 p-2 text-gray-500">
       <div>
-        <button>
+        <button onClick={handlePlaylist}>
           <img className="max-w-max" src="images/playicon.png" alt="img"></img>
         </button>
       </div>

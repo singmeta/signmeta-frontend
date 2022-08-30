@@ -3,6 +3,7 @@ export default function AudioPlayer({ record_url = "" }) {
   const audioPlayer = useRef();
   const [currentTime, setCurrentTime] = useState(0);
   const [seekValue, setSeekValue] = useState(0);
+
   const play = () => {
     audioPlayer.current.play();
   };
@@ -22,18 +23,18 @@ export default function AudioPlayer({ record_url = "" }) {
       (audioPlayer.current.currentTime / audioPlayer.current.duration) * 100
     );
   };
+  const SELECT_MUSIC = localStorage.getItem("select_music");
+  const SELECT_TITLE = localStorage.getItem("select_title");
+
   return (
-    <div className="App">
-      <audio
-        src="https://singmeta.s3.amazonaws.com/user-musics/1661843092186_y2mate.com - what if.mp3"
-        ref={audioPlayer}
-        onTimeUpdate={onPlaying}
-      >
+    <div className="flex justify-center justify-center items-center flex-wrap h-full g-6">
+      <audio src={SELECT_MUSIC} ref={audioPlayer} onTimeUpdate={onPlaying}>
         Your browser does not support the
         <code>audio</code> element.
       </audio>
       <br />
-      <p>{currentTime}</p>
+      {/* <p>{currentTime}</p> */}
+      <p>{SELECT_TITLE}</p>
       <input
         type="range"
         min="0"
@@ -47,13 +48,9 @@ export default function AudioPlayer({ record_url = "" }) {
         }}
       />
       <div>
-        <button onClick={play}>play</button>
-        <button onClick={pause}>pause</button>
-        <button onClick={stop}>stop</button>
-        <button onClick={() => setSpeed(0.5)}>0.5x</button>
-        <button onClick={() => setSpeed(1)}>1x</button>
-        <button onClick={() => setSpeed(1.5)}>1.5x</button>
-        <button onClick={() => setSpeed(2)}>2x</button>
+        <button onClick={play}>▶</button>
+        <button onClick={pause}>⏸</button>
+        <button onClick={stop}>⏹</button>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { UserIDReducer } from "./UserIDReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { MusicUrlReducer } from "./MusicUrlReducer";
 
 const persistConfig = {
   key: "root",
@@ -15,6 +16,7 @@ const persistConfig = {
 // 모든 리듀서를 관할하는 것임
 const rootReducer = combineReducers({
   UserIDReducer,
+  MusicUrlReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

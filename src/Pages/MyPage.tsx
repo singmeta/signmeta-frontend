@@ -16,6 +16,9 @@ function MyPage() {
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
   console.log(REDUX_USER_ID);
 
+  // const REDUX_MUSIC_INFO = useSelector((state: any) => state.MusicUrlReducer);
+  // console.log(REDUX_MUSIC_INFO, "music redux");
+
   useEffect(() => {
     PopularMusicList();
     //LatestMusicList();
@@ -92,15 +95,9 @@ function MyPage() {
               </div>
             </div>
           </div>
-          <div className="flex flex-row-reverse">
-            <button
-              type="button"
-              className="inline-block px-5 py-2 bg-webtn text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg m-2"
-            >
-              <a href="/">뒤로가기</a>
-            </button>
+          <div className="flex flex-row-reverse justify-evenly">
+            <AudioPlayer />
           </div>
-          <AudioPlayer />
         </div>
       </div>
     </section>
