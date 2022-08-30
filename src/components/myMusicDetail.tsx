@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as React from "react";
 import "tailwindcss/tailwind.css";
+import { useEffect } from "react";
 
 function MyMusicDetail({
   title = "",
@@ -9,27 +10,30 @@ function MyMusicDetail({
   music_id = "",
 }) {
   const handleUpload = () => {
-    axios
-      .patch(`/user-musics/${music_id}/public`)
-      .then((response) => {
-        console.log(response);
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log("An error occurred : ", error.response);
-      });
-  };
+    if (is_showed) {
+      // true >> 업로드 o
+      axios
+        .patch(`/user-musics/${music_id}/private`)
+        .then((response) => {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log("An error occurred : ", error.response);
+        });
+    } else {
+      //false >> 업로드 x
 
-  const handleCancle = () => {
-    axios
-      .patch(`/user-musics/${music_id}/private`)
-      .then((response) => {
-        console.log(response);
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log("An error occurred : ", error.response);
-      });
+      axios
+        .patch(`/user-musics/${music_id}/public`)
+        .then((response) => {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log("An error occurred : ", error.response);
+        });
+    }
   };
 
   return (
@@ -51,23 +55,17 @@ function MyMusicDetail({
       <div className="truncate">
         <p className="truncate">{created_at}</p>
       </div>
-      {is_showed ? (
-        <button
-          type="button"
-          onClick={handleCancle}
-          className="p-1 bg-red-500 text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg"
-        >
-          cancle
-        </button>
-      ) : (
-        <button
-          type="button"
-          onClick={handleUpload}
-          className="p-1 bg-webtn text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg"
-        >
-          upload
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={handleUpload}
+        className={`${
+          is_showed
+            ? "bg-red-500 p-1 text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg"
+            : "bg-webtn p-1 text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg"
+        }`}
+      >
+        {is_showed ? "cancle" : "upload"}
+      </button>
     </div>
   );
 }
