@@ -1,9 +1,6 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React from "react";
 import "tailwindcss/tailwind.css";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { save_url } from "actions/MusicUrlAction";
 
 function MyMusicDetail({
   title = "",

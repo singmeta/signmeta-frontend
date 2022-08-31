@@ -14,9 +14,9 @@ export default function AudioPlayer({ record_url = "" }) {
     audioPlayer.current.pause();
     audioPlayer.current.currentTime = 0;
   };
-  const setSpeed = (speed) => {
-    audioPlayer.current.playbackRate = speed;
-  };
+  // const setSpeed = (speed) => {
+  //   audioPlayer.current.playbackRate = speed;
+  // };
   const onPlaying = () => {
     setCurrentTime(audioPlayer.current.currentTime);
     setSeekValue(

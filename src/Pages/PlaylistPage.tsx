@@ -1,11 +1,30 @@
+import axios from "axios";
 import PlaylistDetail from "components/playlistDetail";
 import * as React from "react";
 import "tailwindcss/tailwind.css";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 function PlaylistPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+  const [userPlaylist, setUserPlaylist] = useState<any[]>([]);
+
+  const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
+
+  useEffect(() => {
+    axios
+      .get(`/users/${REDUX_USER_ID}/playlists`)
+      .then((response) => {
+        setUserPlaylist(response.data.playlists);
+      })
+      .catch((error) => {
+        console.log("An error occurred : ", error.response);
+      });
+  }, []);
+
+  console.log(userPlaylist);
 
   return (
     <section className="h-screen ">
@@ -15,10 +34,7 @@ function PlaylistPage() {
             <span className="text-xl text-slate-400 m-5 ml-10 font-bold">
               플레이리스트
             </span>
-            <div className="m-4">
-              <button>인기순</button> / <button>최신순</button>
-              {/* onclick으로 이벤트 등록 */}
-            </div>
+            <div className="m-4">{/* onclick으로 이벤트 등록 */}</div>
             <button
               type="button"
               className="inline-block px-5 h-7 bg-webtn text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg m-4"
@@ -27,9 +43,14 @@ function PlaylistPage() {
             </button>
           </div>
           <div className="overflow-y-auto h-72 p-6">
-            <PlaylistDetail />
-            <PlaylistDetail /> <PlaylistDetail /> <PlaylistDetail />
-            <PlaylistDetail /> <PlaylistDetail /> <PlaylistDetail />
+            {Object.values(userPlaylist)?.map((item: any, index: any) => (
+              <PlaylistDetail
+                title={item.title}
+                music_url={item.record_url}
+                music_id={item._id}
+                key={index}
+              />
+            ))}
           </div>
         </div>
       </div>
