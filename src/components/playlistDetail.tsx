@@ -3,7 +3,13 @@ import * as React from "react";
 import "tailwindcss/tailwind.css";
 import { useSelector } from "react-redux";
 
-function PlaylistDetail({ title = "", music_url = "", music_id = "" }) {
+function PlaylistDetail({
+  title = "",
+  music_url = "",
+  music_id = "",
+  user_nickname = "",
+  play_time = "",
+}) {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
@@ -24,19 +30,27 @@ function PlaylistDetail({ title = "", music_url = "", music_id = "" }) {
       });
   };
 
+  const handlePlaylist = () => {
+    localStorage.setItem("select_music", music_url);
+    localStorage.setItem("select_title", title);
+    window.location.reload();
+  };
+
   return (
     <div className="flex justify-evenly space-x-4 p-2 text-gray-500">
       <div>
-        <img className="max-w-max" src="images/profileimg.png" alt="img" />
+        <button onClick={handlePlaylist}>
+          <img className="max-w-max" src="images/profileimg.png" alt="img" />
+        </button>
       </div>
       <div className="truncate">
         <p className="truncate">{title}</p>
       </div>
       <div>
-        <span>nickname</span>
+        <span>{user_nickname}</span>
       </div>
       <div>
-        <span>playtime</span>
+        <span>{play_time}</span>
       </div>
       <div>
         <button onClick={handleDelete}>

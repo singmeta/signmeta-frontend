@@ -37,6 +37,8 @@ function MyPage() {
     axios
       .get(`/user-musics/users/${REDUX_USER_ID}/popular`)
       .then((response) => {
+        console.log(response.data.userMusic[0].play_time);
+        console.log(response.data.userMusic[0].user_nickname);
         setUserMusicArray(response.data.userMusic);
       })
       .catch((error) => {
@@ -89,6 +91,8 @@ function MyPage() {
                     created_at={item.created_at}
                     music_id={item._id}
                     music_url={item.record_url}
+                    user_nickname={item.user_nickname}
+                    play_time={item.play_time}
                     key={index}
                   />
                 ))}

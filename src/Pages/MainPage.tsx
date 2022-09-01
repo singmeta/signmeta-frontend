@@ -2,12 +2,26 @@ import * as React from "react";
 import "tailwindcss/tailwind.css";
 import Profile1 from "../images/profile1";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function MainPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+  const [userNickname, setUserNickname] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(`/users/${REDUX_USER_ID}`)
+      .then((response) => {
+        setUserNickname(response.data.user.nickname);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("An error occurred : ", error.response);
+      });
+  }, []);
 
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
   console.log(REDUX_USER_ID);
@@ -20,7 +34,7 @@ function MainPage() {
             <div className="col-start-1 col-span-2 ... flex items-center ml-7 m-auto">
               <Profile1 />
               <div className="ml-3">
-                <strong>호옹이</strong>
+                <strong>{userNickname}</strong>
                 <p>
                   <span className="text-white text-sm">프로필 수정하기</span>
                 </p>

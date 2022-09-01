@@ -4,6 +4,7 @@ import * as React from "react";
 import "tailwindcss/tailwind.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import AudioPlayer from "components/audioPlayer";
 
 function PlaylistPage() {
   // const handleSubmit = () => {
@@ -48,9 +49,14 @@ function PlaylistPage() {
                 title={item.title}
                 music_url={item.record_url}
                 music_id={item._id}
+                user_nickname={item.user_nickname}
+                play_time={item.play_time}
                 key={index}
               />
             ))}
+          </div>
+          <div>
+            <AudioPlayer />
           </div>
         </div>
       </div>

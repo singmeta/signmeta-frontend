@@ -8,6 +8,8 @@ function MyMusicDetail({
   created_at = "",
   music_id = "",
   music_url = "",
+  user_nickname = "",
+  play_time = "",
 }) {
   const handlePlaylist = () => {
     localStorage.setItem("select_music", music_url);
@@ -52,10 +54,10 @@ function MyMusicDetail({
         <p className="truncate">{title}</p>
       </div>
       <div>
-        <span>nickname</span>
+        <span>{user_nickname}</span>
       </div>
       <div>
-        <span>playtime</span>
+        <span>{play_time}</span>
       </div>
       <div className="truncate">
         <p className="truncate">{created_at}</p>
