@@ -7,11 +7,45 @@ import SwiperCore, { Navigation, Scrollbar, Pagination } from "swiper";
 import "swiper/css"; //basic
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function ChartPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+  const [chartList, setChartList] = useState<any[]>([]);
+  const [popularClicked, setPopularClicked] = useState(true);
+
+  useEffect(() => {
+    PopularMusicList();
+  }, []);
+
+  const PopularMusicList = () => {
+    setPopularClicked(true);
+    axios
+      .get(`/user-musics/chart/popular`)
+      .then((response) => {
+        console.log(response.data.userMusic, "chart data ");
+        setChartList(response.data.userMusic);
+      })
+      .catch((error) => {
+        console.log("An error occurred : ", error.response);
+      });
+  };
+
+  const LatestMusicList = () => {
+    setPopularClicked(false);
+    axios
+      .get(`/user-musics/chart/latest`)
+      .then((response) => {
+        console.log(response.data.userMusic, "chart data ");
+        setChartList(response.data.userMusic);
+      })
+      .catch((error) => {
+        console.log("An error occurred : ", error.response);
+      });
+  };
 
   SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
@@ -32,8 +66,20 @@ function ChartPage() {
               실시간 차트
             </span>
 
-            <div className="mr-8">
-              <button>인기순</button> / <button>최신순</button>
+            <div className="mr-28 mt-4">
+              <button
+                onClick={PopularMusicList}
+                className={`${popularClicked ? "text-xl font-bold" : ""}`}
+              >
+                인기순
+              </button>{" "}
+              /{" "}
+              <button
+                onClick={LatestMusicList}
+                className={`${popularClicked ? "" : "text-xl font-bold"}`}
+              >
+                최신순
+              </button>
               {/* onclick으로 이벤트 등록 */}
             </div>
             <button type="button" className="text-xl m-2">
@@ -42,36 +88,19 @@ function ChartPage() {
           </div>
 
           <Swiper {...settings} className="flex justify-center m-10">
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
-            <SwiperSlide className="flex justify-center pb-10">
-              <ChartDetail />
-            </SwiperSlide>
+            {Object.values(chartList)?.map((item: any, index: any) => (
+              <SwiperSlide className="flex justify-center pb-10" key={index}>
+                <ChartDetail
+                  title={item.title}
+                  likes={item.likes}
+                  music_id={item._id}
+                  music_url={item.record_url}
+                  user_nickname={item.user_nickname}
+                  ranking={index}
+                  key={index}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
 
           {/* 컴포넌트 등록해서 map으로 돌려 (data : 1. 이미지 2. 닉네임 3. 참여 인원 ) */}

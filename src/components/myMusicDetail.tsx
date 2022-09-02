@@ -43,6 +43,8 @@ function MyMusicDetail({
     }
   };
 
+  let testDate = created_at.substring(0, 10);
+
   return (
     <div className="flex justify-evenly space-x-4 p-2 text-gray-500">
       <div>
@@ -54,13 +56,13 @@ function MyMusicDetail({
         <p className="truncate">{title}</p>
       </div>
       <div>
-        <span>{user_nickname}</span>
+        <p className="truncate">{user_nickname}</p>
       </div>
       <div>
-        <span>{play_time}</span>
+        <p className="truncate">{play_time}</p>
       </div>
       <div className="truncate">
-        <p className="truncate">{created_at}</p>
+        <p className="truncate">{testDate}</p>
       </div>
       <button
         type="button"

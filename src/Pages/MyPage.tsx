@@ -11,6 +11,7 @@ function MyPage() {
   //   console.log('button active')
   // }
   const [userNickname, setUserNickname] = useState("");
+  const [popularClicked, setPopularClicked] = useState(true);
 
   const [userMusicArray, setUserMusicArray] = useState<any[]>([]);
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
@@ -34,6 +35,7 @@ function MyPage() {
   }, [REDUX_USER_ID]);
 
   const PopularMusicList = () => {
+    setPopularClicked(true);
     axios
       .get(`/user-musics/users/${REDUX_USER_ID}/popular`)
       .then((response) => {
@@ -47,6 +49,7 @@ function MyPage() {
   };
 
   const LatestMusicList = () => {
+    setPopularClicked(false);
     axios
       .get(`/user-musics/users/${REDUX_USER_ID}/latest`)
       .then((response) => {
@@ -78,9 +81,20 @@ function MyPage() {
             </div>
 
             <div className="col-span-2 row-span-2 flex flex-col">
-              <div className="text-xl ml-3">
-                <button onClick={PopularMusicList}>인기순 </button>/{" "}
-                <button onClick={LatestMusicList}>최신순</button>
+              <div className="ml-3">
+                <button
+                  onClick={PopularMusicList}
+                  className={`${popularClicked ? "text-xl font-bold" : ""}`}
+                >
+                  인기순{" "}
+                </button>
+                /{" "}
+                <button
+                  onClick={LatestMusicList}
+                  className={`${popularClicked ? "" : "text-xl font-bold"}`}
+                >
+                  최신순
+                </button>
               </div>
               {/* 이거 map으로 돌려  components로 따로 ㄷ뺴야할듯*/}
               <div className="overflow-y-auto h-52 mt-2">
