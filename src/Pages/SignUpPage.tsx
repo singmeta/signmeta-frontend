@@ -14,6 +14,18 @@ interface User {
 function SignUpPage() {
   const navigate = useNavigate();
 
+  const checkEmail = () => {
+    console.log(userEmail);
+    axios
+      .post(`/users/email/validation`, userEmail)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log("An error : ", error);
+      });
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -25,7 +37,6 @@ function SignUpPage() {
       nickname: data1.get("nickname"),
       phone: data1.get("phone"),
     };
-    console.log(user);
 
     if (
       user.email !== "" &&
@@ -37,6 +48,7 @@ function SignUpPage() {
         .post<User>(`/users/register`, user)
         .then((response) => {
           console.log("complete!!");
+          alert("회원가입이 완료되었습니다!");
           navigate(`/`);
         })
         .catch((error) => {
@@ -68,6 +80,13 @@ function SignUpPage() {
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Email address"
                 />
+                <button
+                  className="mt-2 ml-2 bg-webtn text-white rounded-full text-xs px-3 py-1"
+                  onClick={checkEmail}
+                  type="button"
+                >
+                  중복확인
+                </button>
               </div>
 
               <div className="mb-6">
