@@ -10,7 +10,7 @@ function RoomListPage() {
   return (
     <section className="h-screen ">
       <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-        <div className="xl:w-7/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0 border-2 w-96 h-96">
+        <div className="xl:w-7/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0 border-2 rounded-2xl w-96 h-96">
           <div className="flex justify-between">
             <button
               type="button"
