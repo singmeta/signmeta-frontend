@@ -7,20 +7,19 @@ import axios from "axios";
 import AudioPlayer from "components/audioPlayer";
 
 function MyPage() {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
   const [userNickname, setUserNickname] = useState("");
   const [popularClicked, setPopularClicked] = useState(true);
+  const [userCharacter, setUserCharacter] = useState("ninja");
+  const [changeCharacter, setChangeCharacter] = useState("ninja");
 
   const [userMusicArray, setUserMusicArray] = useState<any[]>([]);
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
   console.log(REDUX_USER_ID);
 
-  // const REDUX_MUSIC_INFO = useSelector((state: any) => state.MusicUrlReducer);
-  // console.log(REDUX_MUSIC_INFO, "music redux");
-
-  // images/ninja.png
+  const handleCharacter = () => {
+    axios.patch(`/users/${REDUX_USER_ID}?character=${changeCharacter}`);
+    window.location.reload();
+  };
 
   useEffect(() => {
     PopularMusicList();
@@ -29,7 +28,7 @@ function MyPage() {
       .get(`/users/${REDUX_USER_ID}`)
       .then((response) => {
         setUserNickname(response.data.user.nickname);
-        console.log(response.data.user.character);
+        setUserCharacter(response.data.user.character);
         //여기서 닉네임이랑 이미지 가져와야함
       })
       .catch((error) => {
@@ -80,11 +79,30 @@ function MyPage() {
             <div className="row-span-2 mx-auto text-center">
               <span className="text-lg font-bold ">{userNickname} 님</span>
               <img
-                className="border-2 border-gray-700 rounded-3xl"
-                src="images/ninja.png"
+                className="border-2 border-gray-200 rounded-3xl"
+                src={`images/${userCharacter}.png`}
                 alt="img"
               ></img>
-              <span className="text-base">캐릭터 변경</span>
+              {/* <span className="text-base">캐릭터 변경</span> */}
+              <div className="flex justify-center">
+                <label className="block text-sm font-semibold mt-1 mr-1 dark:text-black">
+                  <button onClick={handleCharacter}>캐릭터 변경</button>
+                </label>
+                <select
+                  id="peopleNum"
+                  className="shadow-md form-control block w-16  text-xl font-normal text-base text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"
+                  onChange={(e) => setChangeCharacter(e.target.value)}
+                >
+                  <option value="default" disabled>
+                    Choose a Your Standerd...
+                  </option>
+                  <option value="ninja">Ninja</option>
+                  <option value="nurse">Nurse</option>
+                  <option value="knight">Knight</option>
+                  <option value="boss">Boss</option>
+                  <option value="professor">Professor</option>
+                </select>
+              </div>
             </div>
 
             <div className="col-span-2 row-span-2 flex flex-col">
