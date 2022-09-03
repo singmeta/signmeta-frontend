@@ -97,6 +97,7 @@ function ChartPage() {
                   music_url={item.record_url}
                   user_nickname={item.user_nickname}
                   ranking={index}
+                  user_id={item.user_id}
                   key={index}
                 />
               </SwiperSlide>

@@ -2,6 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import "tailwindcss/tailwind.css";
+import { useEffect, useState } from "react";
 
 function ChartDetail({
   title = "",
@@ -10,11 +11,26 @@ function ChartDetail({
   music_url = "",
   user_nickname = "",
   ranking = "",
+  user_id = "",
 }) {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
+
+  const [userCharacter, setUserCharacter] = useState("ninja");
+
+  useEffect(() => {
+    axios
+      .get(`/users/${user_id}`)
+      .then((response) => {
+        setUserCharacter(response.data.user.character);
+        //여기서 닉네임이랑 이미지 가져와야함
+      })
+      .catch((error) => {
+        console.log("An error occurred : ", error.response);
+      });
+  }, []);
 
   const handleLike = () => {
     axios
@@ -42,8 +58,8 @@ function ChartDetail({
   return (
     <div className="flex flex-col h-fit w-fit my-auto items-center m-auto">
       {ranking + 1}st
-      <button>
-        <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />
+      <button className="w-24 h-24">
+        <img src={`images/${userCharacter}.png`} alt="charimg" />
       </button>
       <span className="ml-4">
         {title}

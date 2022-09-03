@@ -51,6 +51,7 @@ function PlaylistPage() {
                 music_id={item._id}
                 user_nickname={item.user_nickname}
                 play_time={item.play_time}
+                user_id={item.user_id}
                 key={index}
               />
             ))}
