@@ -24,33 +24,27 @@ function RoomListPage() {
       >
         <div className="xl:w-7/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0 border-2 rounded-2xl w-96 h-96">
           <div className="flex justify-between">
+            <p className="font-bold text-xl text-slate-400 m-5 ml-8">
+              방 리스트
+            </p>
+
             <button
               type="button"
-              className="inline-block px-5 py-2 bg-webtn text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg m-2"
+              className="px-5 bg-webtn text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg m-2 mr-5"
             >
               <a href="/roomcreate">방 만들기</a>
-            </button>
-            <div className="mr-8">
-              <button>인기순</button> / <button>최신순</button>
-              {/* onclick으로 이벤트 등록 */}
-            </div>
-            <button type="button" className="text-xl m-2">
-              🔄
             </button>
           </div>
 
           <div className="overflow-y-auto h-72 grid grid-cols-5 gap-4 pt-5">
-            {/* {Object.values(roomList)?.map((item: any, index: any) => (
+            {Object.values(roomList)?.map((item: any, index: any) => (
               <RoomDetail
-                title={item.title}
-                music_url={item.record_url}
-                music_id={item._id}
-                user_nickname={item.user_nickname}
-                play_time={item.play_time}
-                user_id={item.user_id}
+                room_name={item.room_name}
+                room_type_id={item.room_type_id}
+                password={item.password}
                 key={index}
               />
-            ))} */}
+            ))}
 
             {/* 
             {Object.values(userPlaylist)?.map((item: any, index: any) => (

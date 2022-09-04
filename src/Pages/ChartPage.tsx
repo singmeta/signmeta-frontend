@@ -28,7 +28,7 @@ function ChartPage() {
       .then((response) => {
         console.log(response.data.userMusic, "chart data ");
         setChartList(response.data.userMusic);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => {
         console.log("An error occurred : ", error.response);
@@ -42,7 +42,7 @@ function ChartPage() {
       .then((response) => {
         console.log(response.data.userMusic, "chart data ");
         setChartList(response.data.userMusic);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => {
         console.log("An error occurred : ", error.response);
