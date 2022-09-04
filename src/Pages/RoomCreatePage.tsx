@@ -1,65 +1,76 @@
 import * as React from "react";
 import "tailwindcss/tailwind.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react"; // basic
 import SwiperCore, { Navigation, Scrollbar, Pagination } from "swiper";
 import "swiper/css"; //basic
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+interface RoomInfo {
+  user_id: FormDataEntryValue | null;
+  room_name: FormDataEntryValue | null;
+  room_type_id: FormDataEntryValue | null;
+  is_required_password: FormDataEntryValue | null;
+  password: FormDataEntryValue | null;
+}
 
 function RoomCreatePage() {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
-
-  // const [checkedList, setCheckedList] = useState([]);
-  // // 1️⃣ onChange함수를 사용하여 이벤트 감지, 필요한 값 받아오기
-  // const onCheckedElement = (checked, item) => {
-  //   if (checked) {
-  //     setCheckedList([...checkedList, item]);
-  //   } else if (!checked) {
-  //     setCheckedList(checkedList.filter((el) => el !== item));
-  //   }
-  // };
-  // // 2️⃣ x를 누르면 리스팅 목록에서 카테고리가 삭제되며 체크도 해제 된다
-  // const onRemove = (item) => {
-  //   setCheckedList(checkedList.filter((el) => el !== item));
-  // };
-
   const [roomName, setRoomName] = useState("");
-  const [peopleNum, setPeopleNum] = useState("4");
   const [roomPW, setRoomPW] = useState("");
-  const [roomTheme, setRoomTheme] = useState("1");
+  const [roomTheme, setRoomTheme] = useState(0);
+  const [themeIDList, setThemeIDList] = useState<any[]>([]);
 
-  const [checkedPW, setCheckedPW] = useState(false);
+  const [checkedPW, setCheckedPW] = useState("N");
+
+  const navigate = useNavigate();
+
+  const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
+  console.log(REDUX_USER_ID);
+
+  useEffect(() => {
+    axios.get(`/room-types`).then((res) => {
+      setThemeIDList(res.data.roomTypes);
+    });
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (checkedPW) {
-      if (roomName !== "" && peopleNum !== "" && roomPW !== "") {
-        console.log(roomName, "roomName  ~~~");
-        console.log(peopleNum, "peopleNum ~~~");
-        console.log(roomPW, "roomPW ~~~~~");
-        console.log(roomTheme, "roomTheme~~~~~");
-      } else {
-        alert("모든 항목을 작성해주세요!");
-      }
+
+    const roomInfo: RoomInfo = {
+      user_id: REDUX_USER_ID,
+      room_name: roomName,
+      room_type_id: themeIDList[roomTheme]._id,
+      is_required_password: checkedPW,
+      password: roomPW,
+    };
+
+    if (roomName !== "") {
+      axios
+        .post<RoomInfo>(`/rooms`, roomInfo)
+        .then((response) => {
+          navigate(`/roomlist`);
+        })
+        .catch((error) => {
+          console.log("An error occurred : ", error.response);
+        });
     } else {
-      if (roomName !== "" && peopleNum !== "") {
-        console.log(roomName, "roomName  ~~~");
-        console.log(peopleNum, "peopleNum ~~~");
-        console.log(roomTheme, "roomTheme~~~~~");
-      } else {
-        alert("모든 항목을 작성해주세요!");
-      }
+      alert("방 제목을 작성해주세요");
     }
-    //여기서 포스트로 넘기면 된다.
   };
 
   const handleChecked = (e: any) => {
-    console.log(e.target.checked);
-    setCheckedPW(e.target.checked);
+    if (e.target.checked) {
+      setCheckedPW("Y");
+    } else {
+      setCheckedPW("N");
+    }
+    console.log(checkedPW);
+
     if (e.target.checked === false) {
       setRoomPW("");
     }
@@ -75,6 +86,7 @@ function RoomCreatePage() {
     slidesPerView: 1,
     onSlideChange: (swiper: any) => {
       setRoomTheme(swiper.activeIndex); //테마 설정
+      console.log(swiper.activeIndex);
     },
   };
 
@@ -94,18 +106,14 @@ function RoomCreatePage() {
               </div>
               <Swiper {...settings} className="flex justify-center m-10">
                 <SwiperSlide className="flex justify-center pb-10">
-                  <img src="https://i.imgur.com/nbOmV01.png" alt="charimg " />
+                  <img src="images/roomtheme1.png" alt="asdgasdgsdag" />
                 </SwiperSlide>
                 <SwiperSlide className="flex justify-center pb-10">
-                  <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />2
+                  <img src="images/roomtheme2.png" alt="img" />
                 </SwiperSlide>
                 <SwiperSlide className="flex justify-center pb-10">
-                  <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />3
+                  <img src="images/roomtheme3.png" alt="img" />
                 </SwiperSlide>
-                <SwiperSlide className="flex justify-center pb-10">
-                  <img src="https://i.imgur.com/EP8Qh15.png" alt="charimg" />4
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center">5</SwiperSlide>
               </Swiper>
 
               <div className="mb-6 ">
@@ -116,26 +124,6 @@ function RoomCreatePage() {
                   className="shadow-md form-control block w-full px-4 py-2 text-ms font-normal text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"
                   id="roomName"
                 />
-              </div>
-
-              <div className="mb-6">
-                <label className="block text-sm font-semibold mb-1 ml-1 dark:text-black">
-                  인원 수
-                </label>
-                <select
-                  id="peopleNum"
-                  className="shadow-md form-control block w-full px-4 py-2 text-xl font-normal text-base text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"
-                  onChange={(e) => setPeopleNum(e.target.value)}
-                >
-                  <option value="default" disabled>
-                    Choose a Your Standerd...
-                  </option>
-                  <option value="4">4명</option>
-                  <option value="5">5명</option>
-                  <option value="6">6명</option>
-                  <option value="7">7명</option>
-                  <option value="8">8명</option>
-                </select>
               </div>
 
               <div className="mb-6">

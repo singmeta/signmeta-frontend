@@ -1,11 +1,20 @@
 import * as React from "react";
 import "tailwindcss/tailwind.css";
 import RoomDetail from "../components/roomDetail";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function RoomListPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+  const [roomList, setRoomList] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios.get(`/rooms`).then((res) => {
+      setRoomList(res.data.rooms);
+    });
+  }, []);
 
   return (
     <section className="h-screen ">
@@ -30,15 +39,31 @@ function RoomListPage() {
             </button>
           </div>
 
-          <div className="grid grid-cols-5 gap-4">
-            <RoomDetail />
-            <RoomDetail />
-            <RoomDetail />
-            <RoomDetail />
-            <RoomDetail />
-            <RoomDetail />
-            <RoomDetail />
-            <RoomDetail />
+          <div className="overflow-y-auto h-72 grid grid-cols-5 gap-4 pt-5">
+            {/* {Object.values(roomList)?.map((item: any, index: any) => (
+              <RoomDetail
+                title={item.title}
+                music_url={item.record_url}
+                music_id={item._id}
+                user_nickname={item.user_nickname}
+                play_time={item.play_time}
+                user_id={item.user_id}
+                key={index}
+              />
+            ))} */}
+
+            {/* 
+            {Object.values(userPlaylist)?.map((item: any, index: any) => (
+              <PlaylistDetail
+                title={item.title}
+                music_url={item.record_url}
+                music_id={item._id}
+                user_nickname={item.user_nickname}
+                play_time={item.play_time}
+                user_id={item.user_id}
+                key={index}
+              />
+            ))} */}
 
             {/* 컴포넌트 등록해서 map으로 돌려 (data : 1. 이미지 2. 닉네임 3. 참여 인원 ) */}
           </div>
