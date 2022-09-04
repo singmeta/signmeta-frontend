@@ -136,7 +136,7 @@ function RoomCreatePage() {
                     className="ml-3 w-4 h-4 bg-gray-100 rounded border-gray-500 accent-slate-50 focus:accent-slate-500"
                   />
                 </p>
-                {checkedPW ? (
+                {checkedPW === "Y" ? (
                   <input
                     type="password"
                     className="shadow-md form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"

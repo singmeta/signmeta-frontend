@@ -9,13 +9,30 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import SearchModal from "components/modal/SearchModal";
 
 function ChartPage() {
   // const handleSubmit = () => {
   //   console.log('button active')
   // }
+
   const [chartList, setChartList] = useState<any[]>([]);
+  const [searchMusicList, setSearchMusicList] = useState<any[]>([]);
   const [popularClicked, setPopularClicked] = useState(true);
+  const [word, setWord] = useState("sowhat");
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const test = () => {
+    axios.get(`/user-musics/chart/search?q=${word}`).then((res) => {
+      setSearchMusicList(res.data.userMusic);
+      setModalOpen(true);
+    });
+  };
 
   useEffect(() => {
     PopularMusicList();
@@ -26,7 +43,6 @@ function ChartPage() {
     axios
       .get(`/user-musics/chart/popular`)
       .then((response) => {
-        console.log(response.data.userMusic, "chart data ");
         setChartList(response.data.userMusic);
         // window.location.reload();
       })
@@ -71,7 +87,7 @@ function ChartPage() {
               실시간 차트
             </span>
 
-            <div className="mr-28 mt-4">
+            <div className="ml-7 mt-4">
               <button
                 onClick={PopularMusicList}
                 className={`${popularClicked ? "text-xl font-bold" : ""}`}
@@ -87,9 +103,20 @@ function ChartPage() {
               </button>
               {/* onclick으로 이벤트 등록 */}
             </div>
-            <button type="button" className="text-xl m-2">
-              🔄
-            </button>
+            <div className="flex">
+              <button onClick={test}>
+                <img
+                  src="images/searchimg.png"
+                  alt="img"
+                  className="mb-3 w-4 h-4"
+                />
+              </button>
+              <input
+                onChange={(e) => setWord(e.target.value)}
+                className="m-3 border w-30 h-7 rounded"
+                type="text"
+              ></input>
+            </div>
           </div>
 
           <Swiper {...settings} className="flex justify-center m-10">
@@ -111,6 +138,11 @@ function ChartPage() {
 
           {/* 컴포넌트 등록해서 map으로 돌려 (data : 1. 이미지 2. 닉네임 3. 참여 인원 ) */}
         </div>
+        <SearchModal
+          open={modalOpen}
+          close={closeModal}
+          header={searchMusicList}
+        ></SearchModal>
       </div>
     </section>
   );
