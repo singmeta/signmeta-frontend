@@ -50,7 +50,7 @@ function PlaylistDetail({
   };
 
   return (
-    <div className="flex justify-evenly space-x-4 p-2 text-gray-500">
+    <div className="flex justify-evenly p-2 text-gray-500">
       <div>
         <button onClick={handlePlaylist}>
           <img
@@ -61,13 +61,13 @@ function PlaylistDetail({
         </button>
       </div>
       <div className="truncate">
-        <p className="truncate">{title}</p>
+        <p className="truncate text-xl">{title}</p>
       </div>
       <div>
-        <span>{user_nickname}</span>
+        <span className=" text-xl">{user_nickname}</span>
       </div>
       <div>
-        <span>{play_time}</span>
+        <span className=" text-xl">{play_time}</span>
       </div>
       <div>
         <button onClick={handleDelete}>

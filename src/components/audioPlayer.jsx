@@ -27,7 +27,7 @@ export default function AudioPlayer({ record_url = "" }) {
   const SELECT_TITLE = localStorage.getItem("select_title");
 
   return (
-    <div className="flex justify-center justify-center items-center flex-wrap h-full g-6">
+    <div className="flex justify-center justify-center items-center flex-wrap h-full">
       <audio src={SELECT_MUSIC} ref={audioPlayer} onTimeUpdate={onPlaying}>
         Your browser does not support the
         <code>audio</code> element.

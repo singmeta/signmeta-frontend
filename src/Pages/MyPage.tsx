@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AudioPlayer from "components/audioPlayer";
+import "../font/font.css";
 
 function MyPage() {
   const [userNickname, setUserNickname] = useState("");
@@ -65,19 +66,22 @@ function MyPage() {
 
   return (
     <section className="h-screen ">
-      <div className="flex justify-center justify-center items-center flex-wrap h-full g-6">
+      <div
+        style={{ fontFamily: "IrishGrover" }}
+        className="flex justify-center justify-center items-center flex-wrap h-full g-6"
+      >
         <div className="xl:w-7/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0 border-2 rounded-2xl w-96 h-96">
           <div className="flex justify-between">
-            <span className="text-xl text-slate-400 m-5 font-bold">
+            <p className=" text-2xl text-slate-400 m-5 ">
               마이페이지 - 내 녹음 음악
-            </span>
+            </p>
             <button type="button" className="text-xl mr-5">
               ⚙️
             </button>
           </div>
           <div className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-2">
             <div className="row-span-2 mx-auto text-center">
-              <span className="text-lg font-bold ">{userNickname} 님</span>
+              <span className="text-xl font-bold ">{userNickname} 님</span>
               <img
                 className="border-2 border-gray-200 rounded-3xl"
                 src={`images/${userCharacter}.png`}
