@@ -2,6 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import "tailwindcss/tailwind.css";
 import { useState, useEffect } from "react";
+import MyModal from "./modal/Modal";
 
 function RoomDetail({ room_name = "", room_type_id = "", password = "" }) {
   // const handleSubmit = () => {
@@ -9,16 +10,21 @@ function RoomDetail({ room_name = "", room_type_id = "", password = "" }) {
   // }
   const [imgUrl, setImgUrl] = useState("");
   const [passwordTF, setPasswordTF] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const roomType = axios.get(`/room-types/${room_type_id}`).then((res) => {
     setImgUrl(res.data.roomType.thumbnail_image_url);
   });
 
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   const handleEnterRoom = () => {
     if (password !== null) {
-      // 비밀번호 있으면 모달창 o
+      setModalOpen(true);
     } else {
-      //비밀번호 없으면 모달창 x
+      setModalOpen(false);
     }
   };
   useEffect(() => {
@@ -29,10 +35,8 @@ function RoomDetail({ room_name = "", room_type_id = "", password = "" }) {
 
   return (
     <div className="flex flex-col h-fit w-fit my-auto items-center m-auto">
-      <button>
-        <a href="/webview">
-          <img className="w-20 h-20" src={imgUrl} alt="charimg" />
-        </a>
+      <button onClick={handleEnterRoom}>
+        <img className="w-20 h-20" src={imgUrl} alt="charimg" />
       </button>
 
       <span className="font-bold">
@@ -46,6 +50,12 @@ function RoomDetail({ room_name = "", room_type_id = "", password = "" }) {
         )}
       </span>
       <span className="text-xl">{room_name}</span>
+
+      <MyModal
+        open={modalOpen}
+        close={closeModal}
+        header="비밀번호를 입력하세요"
+      ></MyModal>
     </div>
   );
 }
