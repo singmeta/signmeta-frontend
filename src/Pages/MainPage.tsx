@@ -8,6 +8,7 @@ import NoticeModal from "components/modal/NoticeModal";
 
 function MainPage() {
   const [userNickname, setUserNickname] = useState("");
+  const [userProfile, setUserProfile] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
@@ -15,6 +16,8 @@ function MainPage() {
       .get(`/users/${REDUX_USER_ID}`)
       .then((response) => {
         setUserNickname(response.data.user.nickname);
+        setUserProfile(response.data.user.profile_picture_url);
+        console.log(userProfile);
       })
       .catch((error) => {
         console.log("An error occurred : ", error.response);
@@ -37,7 +40,8 @@ function MainPage() {
         <div className="xl:w-7/12 lg:w-5/12 md:w-8/12 mb-12  md:mb-0 ">
           <div className="grid grid-cols-6 gap-3 h-full max-w-7xl rounded-2xl bg-no-repeat bg-singmetaBack flex justify-center p-6 m-10">
             <div className="col-start-1 col-span-2 ... flex items-center ml-7 m-auto">
-              <Profile1 />
+              {/* <Profile1 /> */}
+              <img src={userProfile} alt="" className="rounded-full w-12" />
               <div className="ml-3">
                 <strong>{userNickname}</strong>
                 <p>
