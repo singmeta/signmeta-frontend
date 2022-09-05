@@ -20,7 +20,6 @@ function MyPage() {
 
   const [userMusicArray, setUserMusicArray] = useState<any[]>([]);
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
-  console.log(REDUX_USER_ID);
 
   const handleSearch = () => {
     axios
@@ -60,8 +59,6 @@ function MyPage() {
     axios
       .get(`/user-musics/users/${REDUX_USER_ID}/popular`)
       .then((response) => {
-        console.log(response.data.userMusic[0].play_time);
-        console.log(response.data.userMusic[0].user_nickname);
         setUserMusicArray(response.data.userMusic);
       })
       .catch((error) => {
@@ -74,7 +71,6 @@ function MyPage() {
     axios
       .get(`/user-musics/users/${REDUX_USER_ID}/latest`)
       .then((response) => {
-        console.log(response.data.userMusic[0].title);
         setUserMusicArray(response.data.userMusic);
       })
       .catch((error) => {

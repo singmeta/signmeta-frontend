@@ -5,9 +5,6 @@ import { useState, useEffect } from "react";
 import MyModal from "./modal/Modal";
 
 function RoomDetail({ room_name = "", room_type_id = "", password = "" }) {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
   const [imgUrl, setImgUrl] = useState("");
   const [passwordTF, setPasswordTF] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);

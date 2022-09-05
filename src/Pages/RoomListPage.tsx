@@ -5,9 +5,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function RoomListPage() {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
   const [roomList, setRoomList] = useState<any[]>([]);
 
   useEffect(() => {

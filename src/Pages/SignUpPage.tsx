@@ -25,7 +25,6 @@ function SignUpPage() {
     axios
       .post(`/users/email/validation`, user_email)
       .then((res) => {
-        console.log(res);
         alert("사용가능한 이메일입니다.");
       })
       .catch((error) => {
@@ -56,7 +55,6 @@ function SignUpPage() {
       axios
         .post<User>(`/users/register`, user)
         .then((response) => {
-          console.log("complete!!");
           alert("회원가입이 완료되었습니다!");
           navigate(`/`);
         })

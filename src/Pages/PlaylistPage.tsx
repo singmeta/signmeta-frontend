@@ -7,9 +7,6 @@ import { useSelector } from "react-redux";
 import AudioPlayer from "components/audioPlayer";
 
 function PlaylistPage() {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
   const [userPlaylist, setUserPlaylist] = useState<any[]>([]);
 
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
@@ -24,8 +21,6 @@ function PlaylistPage() {
         console.log("An error occurred : ", error.response);
       });
   }, []);
-
-  console.log(userPlaylist);
 
   return (
     <section className="h-screen ">

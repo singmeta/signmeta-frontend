@@ -11,9 +11,6 @@ interface LoginInfo {
 }
 
 function LoginPage() {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -31,9 +28,6 @@ function LoginPage() {
       axios
         .post(`/users/login`, userInfo)
         .then((response) => {
-          console.log("complete!!");
-          console.log(response.data);
-          console.log(response.data.userId); //이거 전역관리 630cd41b06fbcf281d29fc02 // origin 630db68306fbcf281d29fc34
           if (response.data.success === true) {
             dispatch(save_id(response.data.userId));
             navigate(`/mainpage`);

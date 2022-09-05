@@ -22,7 +22,6 @@ function MyMusicDetail({
       axios
         .patch(`/user-musics/${music_id}/private`)
         .then((response) => {
-          console.log(response);
           window.location.reload();
         })
         .catch((error) => {
@@ -34,7 +33,6 @@ function MyMusicDetail({
       axios
         .patch(`/user-musics/${music_id}/public`)
         .then((response) => {
-          console.log(response);
           window.location.reload();
         })
         .catch((error) => {

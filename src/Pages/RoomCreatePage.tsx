@@ -30,7 +30,6 @@ function RoomCreatePage() {
   const navigate = useNavigate();
 
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
-  console.log(REDUX_USER_ID);
 
   useEffect(() => {
     axios.get(`/room-types`).then((res) => {
@@ -69,7 +68,6 @@ function RoomCreatePage() {
     } else {
       setCheckedPW("N");
     }
-    console.log(checkedPW);
 
     if (e.target.checked === false) {
       setRoomPW("");

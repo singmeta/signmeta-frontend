@@ -13,9 +13,6 @@ function ChartDetail({
   ranking = "",
   user_id = "",
 }) {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
 
   const [userCharacter, setUserCharacter] = useState("ninja");
@@ -36,7 +33,6 @@ function ChartDetail({
     axios
       .patch(`/user-musics/${music_id}/likes`)
       .then((res) => {
-        console.log(res);
         window.location.reload();
       })
       .catch((error) => {
@@ -47,9 +43,7 @@ function ChartDetail({
   const addPlaylist = () => {
     axios
       .patch(`/users/${REDUX_USER_ID}/playlists/${music_id}`)
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((error) => {
         console.log("An error :", error);
       });

@@ -15,7 +15,6 @@ function MainPage() {
       .get(`/users/${REDUX_USER_ID}`)
       .then((response) => {
         setUserNickname(response.data.user.nickname);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log("An error occurred : ", error.response);
@@ -27,7 +26,7 @@ function MainPage() {
   };
 
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
-  console.log(REDUX_USER_ID);
+  // console.log(REDUX_USER_ID);
 
   return (
     <section className="h-screen ">

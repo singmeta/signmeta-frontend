@@ -12,9 +12,6 @@ function PlaylistDetail({
   play_time = "",
   user_id = "",
 }) {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
   const [userCharacter, setUserCharacter] = useState("ninja");
 
   useEffect(() => {
@@ -30,7 +27,6 @@ function PlaylistDetail({
   }, []);
 
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
-  console.log(REDUX_USER_ID);
 
   const handleDelete = () => {
     axios
