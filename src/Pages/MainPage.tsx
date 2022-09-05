@@ -4,12 +4,11 @@ import Profile1 from "../images/profile1";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import NoticeModal from "components/modal/NoticeModal";
 
 function MainPage() {
-  // const handleSubmit = () => {
-  //   console.log('button active')
-  // }
   const [userNickname, setUserNickname] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -22,6 +21,10 @@ function MainPage() {
         console.log("An error occurred : ", error.response);
       });
   }, []);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
   console.log(REDUX_USER_ID);
@@ -53,7 +56,7 @@ function MainPage() {
                 playlist
               </a>
             </button>
-            <button className="col-end-5 row-span-2 col-span-2 ... m-auto">
+            <button className="col-end-5 row-span-2 col-span-2 m-auto">
               <img src="https://i.imgur.com/WkuQGWl.png" alt="character" />
             </button>
             <button className="col-end-7 col-span-1 ... m-auto  text-white">
@@ -68,13 +71,26 @@ function MainPage() {
                 mypage
               </a>
             </button>
+
             <button className="col-start-1 col-span-1 ..."></button>
+            <button
+              onClick={(e) => setModalOpen(true)}
+              className="col-start-1 col-span-1 ... m-auto  text-white"
+            >
+              <img src="https://i.imgur.com/0Q6vDCL.png" alt="" />
+              notice
+            </button>
             <button className="col-end-7 col-span-1 ... m-auto">
               <a href="/roomlist">
                 <img src="https://i.imgur.com/J73mp5N.png" alt="room" />
               </a>
             </button>
           </div>
+          <NoticeModal
+            open={modalOpen}
+            close={closeModal}
+            header=""
+          ></NoticeModal>
         </div>
       </div>
     </section>
