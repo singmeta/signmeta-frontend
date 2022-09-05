@@ -19,7 +19,7 @@ function ChartPage() {
   const [chartList, setChartList] = useState<any[]>([]);
   const [searchMusicList, setSearchMusicList] = useState<any[]>([]);
   const [popularClicked, setPopularClicked] = useState(true);
-  const [word, setWord] = useState("sowhat");
+  const [word, setWord] = useState("");
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -27,7 +27,7 @@ function ChartPage() {
     setModalOpen(false);
   };
 
-  const test = () => {
+  const handleSearch = () => {
     axios.get(`/user-musics/chart/search?q=${word}`).then((res) => {
       setSearchMusicList(res.data.userMusic);
       setModalOpen(true);
@@ -104,7 +104,7 @@ function ChartPage() {
               {/* onclick으로 이벤트 등록 */}
             </div>
             <div className="flex">
-              <button onClick={test}>
+              <button onClick={handleSearch}>
                 <img
                   src="images/searchimg.png"
                   alt="img"

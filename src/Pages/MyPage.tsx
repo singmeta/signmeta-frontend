@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AudioPlayer from "components/audioPlayer";
 import "../font/font.css";
+import SearchModal from "components/modal/SearchModal";
 
 function MyPage() {
   const [userNickname, setUserNickname] = useState("");
@@ -13,9 +14,26 @@ function MyPage() {
   const [userCharacter, setUserCharacter] = useState("ninja");
   const [changeCharacter, setChangeCharacter] = useState("ninja");
 
+  const [searchMusicList, setSearchMusicList] = useState<any[]>([]);
+  const [word, setWord] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+
   const [userMusicArray, setUserMusicArray] = useState<any[]>([]);
   const REDUX_USER_ID = useSelector((state: any) => state.UserIDReducer);
   console.log(REDUX_USER_ID);
+
+  const handleSearch = () => {
+    axios
+      .get(`/user-musics/users/${REDUX_USER_ID}/search?q=${word}`)
+      .then((res) => {
+        setSearchMusicList(res.data.userMusic);
+        setModalOpen(true);
+      });
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const handleCharacter = () => {
     axios.patch(`/users/${REDUX_USER_ID}?character=${changeCharacter}`);
@@ -75,9 +93,20 @@ function MyPage() {
             <p className=" text-2xl text-slate-400 m-5 ">
               마이페이지 - 내 녹음 음악
             </p>
-            <button type="button" className="text-xl mr-5">
-              ⚙️
-            </button>
+            <div className="flex m-2">
+              <button onClick={handleSearch}>
+                <img
+                  src="images/searchimg.png"
+                  alt="img"
+                  className=" w-4 h-4"
+                />
+              </button>
+              <input
+                onChange={(e) => setWord(e.target.value)}
+                className="m-3 border w-30 h-7 rounded"
+                type="text"
+              ></input>
+            </div>
           </div>
           <div className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-2">
             <div className="row-span-2 mx-auto text-center">
@@ -146,6 +175,11 @@ function MyPage() {
             <AudioPlayer />
           </div>
         </div>
+        <SearchModal
+          open={modalOpen}
+          close={closeModal}
+          header={searchMusicList}
+        ></SearchModal>
       </div>
     </section>
   );
