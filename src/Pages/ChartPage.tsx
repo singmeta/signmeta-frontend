@@ -81,6 +81,7 @@ function ChartPage() {
     pagination: { clickable: true },
     scrollbar: { draggable: true, el: null },
     slidesPerView: 5,
+    slidesPerGroup: 5,
   };
 
   return (
