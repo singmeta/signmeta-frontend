@@ -12,6 +12,7 @@ function RoomListPage() {
     axios.get(`/rooms`).then((res) => {
       setRoomList(res.data.rooms);
     });
+    console.log(roomList);
   }, []);
 
   return (

@@ -38,9 +38,6 @@ function MainPage() {
         style={{ fontFamily: "IrishGrover" }}
         className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
       >
-        <div className="absolute top-3 right-3">
-          <BackBtn />
-        </div>
         <div className="xl:w-7/12 lg:w-5/12 md:w-8/12 mb-12  md:mb-0 ">
           <div className="grid grid-cols-6 gap-3 h-full max-w-7xl rounded-2xl bg-no-repeat bg-singmetaBack flex justify-center p-6 m-10">
             <div className="col-start-1 col-span-2 ... flex items-center ml-7 m-auto">

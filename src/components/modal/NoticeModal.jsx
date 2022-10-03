@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Modal from "../modal/modal.css";
+import { useNavigate } from "react-router-dom";
 
 const NoticeModal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, header } = props;
   const [noticeList, setNoticeList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadNoticeList();
@@ -16,15 +18,31 @@ const NoticeModal = (props) => {
     });
   };
 
+  const handleNotice = () => {
+    console.log("gopod");
+    navigate(`/`);
+  };
+
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? "openModal modal" : "modal"}>
       {open ? (
         <main className="flex flex-col text-white ">
-          <p className="flex justify-center text-2xl mb-5 font-bold">공지사항</p>
+          <p className="flex justify-center text-2xl mb-5 font-bold">
+            공지사항
+          </p>
           {Object.values(noticeList)?.map((item, index) => (
             <div className="flex p-2" key={index}>
-              <p className="truncate justify-left flex_title title">{item.title}</p>
+              <button
+                onClick={() => {
+                  navigate(`/`, { state: item._id });
+                }}
+                className="truncate justify-left flex_title title"
+              >
+                <p className="truncate justify-left flex_title title">
+                  {item.title}
+                </p>
+              </button>
               <p className="truncate justify-left flex_item">{item.type}</p>
             </div>
           ))}
@@ -38,7 +56,7 @@ const NoticeModal = (props) => {
             text-overflow: ellipsis;
           }
           .flex_title {
-            flex: 5; /* flex: 1 1 0 */
+            flex: 2; /* flex: 1 1 0 */
             overflow: auto;
           }
           .flex_item {
