@@ -35,11 +35,6 @@ function MyPage() {
     setModalOpen(false);
   };
 
-  const handleCharacter = () => {
-    axios.patch(`/users/${REDUX_USER_ID}?character=${changeCharacter}`);
-    window.location.reload();
-  };
-
   useEffect(() => {
     PopularMusicList();
     //LatestMusicList();
@@ -119,12 +114,17 @@ function MyPage() {
               {/* <span className="text-base">캐릭터 변경</span> */}
               <div className="flex justify-center">
                 <label className="block text-sm font-semibold mt-1 mr-1 dark:text-black">
-                  <button onClick={handleCharacter}>캐릭터 변경</button>
+                  <span>캐릭터 변경</span>
                 </label>
                 <select
                   id="peopleNum"
                   className="shadow-md form-control block w-16  text-xl font-normal text-base text-gray-700 bg-white bg-clip-padding border border-gray-100 rounded focus:border-gray-300 focus:outline-none"
-                  onChange={(e) => setChangeCharacter(e.target.value)}
+                  onChange={(e) => {
+                    axios.patch(
+                      `/users/${REDUX_USER_ID}?character=${e.target.value}`
+                    );
+                    window.location.reload();
+                  }}
                 >
                   <option value="default" disabled>
                     Choose a Your Standerd...
