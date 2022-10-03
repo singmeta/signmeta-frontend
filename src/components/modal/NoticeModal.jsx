@@ -21,18 +21,32 @@ const NoticeModal = (props) => {
     <div className={open ? "openModal modal" : "modal"}>
       {open ? (
         <main className="flex flex-col text-white ">
-          <p className="flex justify-center text-2xl mb-5 font-bold">
-            공지사항
-          </p>
+          <p className="flex justify-center text-2xl mb-5 font-bold">공지사항</p>
           {Object.values(noticeList)?.map((item, index) => (
-            <div className="flex justify-evenly p-2" key={index}>
-              <p className="truncate">{item.title}</p>
-              <p className="truncate">{item.type}</p>
+            <div className="flex p-2" key={index}>
+              <p className="truncate justify-left flex_title title">{item.title}</p>
+              <p className="truncate justify-left flex_item">{item.type}</p>
             </div>
           ))}
-          <button className="close" onClick={close}>
+          <button className="close mt-4" onClick={close}>
             close
           </button>
+          <style>
+            {`
+          .title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .flex_title {
+            flex: 5; /* flex: 1 1 0 */
+            overflow: auto;
+          }
+          .flex_item {
+            flex: 1; /* flex: 1 1 0 */
+            overflow: auto;
+          }
+        `}
+          </style>
         </main>
       ) : null}
     </div>

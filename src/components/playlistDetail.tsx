@@ -4,14 +4,7 @@ import "tailwindcss/tailwind.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-function PlaylistDetail({
-  title = "",
-  music_url = "",
-  music_id = "",
-  user_nickname = "",
-  play_time = "",
-  user_id = "",
-}) {
+function PlaylistDetail({ title = "", music_url = "", music_id = "", user_nickname = "", play_time = "", user_id = "" }) {
   const [userCharacter, setUserCharacter] = useState("ninja");
 
   useEffect(() => {
@@ -46,38 +39,46 @@ function PlaylistDetail({
   };
 
   return (
-    <div className="flex justify-evenly p-2 text-gray-500">
-      <div>
+    <div className="flex justify-evenly p-2 text-gray-500 text-center">
+      <div className="flex_item">
         <button onClick={handlePlaylist}>
-          <img
-            className="w-16 h-16"
-            src={`images/${userCharacter}.png`}
-            alt="img"
-          />
+          <img className="w-16 h-16" src={`images/${userCharacter}.png`} alt="img" />
         </button>
       </div>
-      <div className="truncate">
+      <div className="flex_title truncate">
         <p className="truncate text-xl">{title}</p>
       </div>
-      <div>
+      <div className="flex_item">
         <span className=" text-xl">{user_nickname}</span>
       </div>
-      <div>
+      <div className="flex_item">
         <span className=" text-xl">{play_time}</span>
       </div>
-      <div>
+      <div className="flex_item">
         <button onClick={handleDelete}>
-          <img
-            className="max-w-max"
-            src="images/deleteicon.png"
-            alt="img"
-          ></img>
+          <img className="max-w-max" src="images/deleteicon.png" alt="img"></img>
         </button>
       </div>
       {/* <button type="button">
         <img className="mx-auto" src="images/favoriteicon.png" alt="img" />
         <span>1.4k</span>
       </button> */}
+      <style>
+        {`
+          .flex_play_btn {
+            flex: 0.3; /* flex: 1 1 0 */
+            overflow: auto;
+          }
+          .flex_title {
+            flex: 2; /* flex: 1 1 0 */
+            overflow: auto;
+          }
+          .flex_item {
+            flex: 1; /* flex: 1 1 0 */
+            overflow: auto;
+          }
+        `}
+      </style>
     </div>
   );
 }
