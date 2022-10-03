@@ -3,6 +3,7 @@ import "tailwindcss/tailwind.css";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import BackBtn from "components/BackBtn";
 
 interface User {
   email: FormDataEntryValue | null;
@@ -70,6 +71,9 @@ function SignUpPage() {
 
   return (
     <section className="h-screen">
+      <div className="absolute top-3 right-3">
+        <BackBtn />
+      </div>
       <div
         style={{ fontFamily: "IrishGrover" }}
         className="px-6 h-full text-gray-800"

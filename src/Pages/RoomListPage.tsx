@@ -3,6 +3,7 @@ import "tailwindcss/tailwind.css";
 import RoomDetail from "../components/roomDetail";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import BackBtn from "components/BackBtn";
 
 function RoomListPage() {
   const [roomList, setRoomList] = useState<any[]>([]);
@@ -24,13 +25,17 @@ function RoomListPage() {
             <p className="font-bold text-xl text-slate-400 m-5 ml-8">
               방 리스트
             </p>
-
-            <button
-              type="button"
-              className="px-5 bg-webtn text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg m-2 mr-5"
-            >
-              <a href="/roomcreate">방 만들기</a>
-            </button>
+            <div className="flex flex-row">
+              <button
+                type="button"
+                className="px-5 bg-webtn text-white font-medium text-sm rounded-full focus:bg-hoverWebtn focus:shadow-lg focus:outline-none focus:ring-0 active:bg-hoverWebtn active:shadow-lg m-2 mr-5"
+              >
+                <a href="/roomcreate">방 만들기</a>
+              </button>
+              <div className="mt-3 mr-3">
+                <BackBtn />
+              </div>
+            </div>
           </div>
 
           <div className="overflow-y-auto h-72 grid grid-cols-5 gap-4 pt-5">

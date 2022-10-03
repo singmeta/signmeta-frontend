@@ -7,6 +7,7 @@ import axios from "axios";
 import AudioPlayer from "components/audioPlayer";
 import "../font/font.css";
 import SearchModal from "components/modal/SearchModal";
+import BackBtn from "components/BackBtn";
 
 function MyPage() {
   const [userNickname, setUserNickname] = useState("");
@@ -102,6 +103,9 @@ function MyPage() {
                 className="m-3 border w-30 h-7 rounded"
                 type="text"
               ></input>
+              <div className="mt-3 mr-3">
+                <BackBtn />
+              </div>
             </div>
           </div>
           <div className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-2">

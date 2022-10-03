@@ -1,7 +1,5 @@
 import ChartDetail from "components/chartDetail";
-import * as React from "react";
 import "tailwindcss/tailwind.css";
-
 import { Swiper, SwiperSlide } from "swiper/react"; // basic
 import SwiperCore, { Navigation, Scrollbar, Pagination } from "swiper";
 import "swiper/css"; //basic
@@ -10,6 +8,7 @@ import "swiper/css/pagination";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import SearchModal from "components/modal/SearchModal";
+import BackBtn from "components/BackBtn";
 
 function ChartPage() {
   // const handleSubmit = () => {
@@ -133,6 +132,9 @@ function ChartPage() {
                 className="m-3 border w-30 h-7 rounded"
                 type="text"
               ></input>
+              <div className="mt-3 mr-3">
+                <BackBtn />
+              </div>
             </div>
           </div>
 

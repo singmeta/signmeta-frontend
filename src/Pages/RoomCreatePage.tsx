@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import BackBtn from "components/BackBtn";
 
 interface RoomInfo {
   user_id: FormDataEntryValue | null;
@@ -91,6 +92,9 @@ function RoomCreatePage() {
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
+        <div className="absolute top-3 right-3">
+          <BackBtn />
+        </div>
         <div
           style={{ fontFamily: "IrishGrover" }}
           className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"

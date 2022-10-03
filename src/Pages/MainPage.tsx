@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NoticeModal from "components/modal/NoticeModal";
+import BackBtn from "components/BackBtn";
 
 function MainPage() {
   const [userNickname, setUserNickname] = useState("");
@@ -37,6 +38,9 @@ function MainPage() {
         style={{ fontFamily: "IrishGrover" }}
         className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
       >
+        <div className="absolute top-3 right-3">
+          <BackBtn />
+        </div>
         <div className="xl:w-7/12 lg:w-5/12 md:w-8/12 mb-12  md:mb-0 ">
           <div className="grid grid-cols-6 gap-3 h-full max-w-7xl rounded-2xl bg-no-repeat bg-singmetaBack flex justify-center p-6 m-10">
             <div className="col-start-1 col-span-2 ... flex items-center ml-7 m-auto">
@@ -49,9 +53,12 @@ function MainPage() {
                 </p>
               </div>
             </div>
+
             <button className="col-end-7 col-span-1 ... m-auto  text-white">
-              <img src="https://i.imgur.com/6eE5nJm.png" alt="exit" />
-              exit
+              <a href="/">
+                <img src="https://i.imgur.com/6eE5nJm.png" alt="exit" />
+                exit
+              </a>
             </button>
             <button className="col-start-1 col-span-1 ... m-auto text-white">
               <a href="/playlistpage">
