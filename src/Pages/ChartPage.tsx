@@ -23,6 +23,8 @@ function ChartPage() {
 
   const [modalOpen, setModalOpen] = useState(false);
 
+  console.log(popularClicked);
+
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -35,7 +37,12 @@ function ChartPage() {
   };
 
   useEffect(() => {
-    PopularMusicList();
+    const what = localStorage.getItem("chartSort");
+    if (what === "true") {
+      PopularMusicList();
+    } else {
+      LatestMusicList();
+    }
   }, []);
 
   const PopularMusicList = () => {
@@ -44,6 +51,7 @@ function ChartPage() {
       .get(`/user-musics/chart/popular`)
       .then((response) => {
         setChartList(response.data.userMusic);
+
         // window.location.reload();
       })
       .catch((error) => {
@@ -89,14 +97,22 @@ function ChartPage() {
 
             <div className="ml-7 mt-4">
               <button
-                onClick={PopularMusicList}
+                onClick={() => {
+                  PopularMusicList();
+                  localStorage.setItem("chartSort", "true");
+                  window.location.reload();
+                }}
                 className={`${popularClicked ? "text-xl font-bold" : ""}`}
               >
                 인기순
               </button>{" "}
               /{" "}
               <button
-                onClick={LatestMusicList}
+                onClick={() => {
+                  LatestMusicList();
+                  localStorage.setItem("chartSort", "false");
+                  window.location.reload();
+                }}
                 className={`${popularClicked ? "" : "text-xl font-bold"}`}
               >
                 최신순

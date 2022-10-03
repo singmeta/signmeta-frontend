@@ -29,6 +29,8 @@ function ChartDetail({
       });
   }, []);
 
+  console.log(userCharacter, ": url");
+
   const handleLike = () => {
     axios
       .patch(`/user-musics/${music_id}/likes`)
@@ -52,9 +54,11 @@ function ChartDetail({
   return (
     <div className="flex flex-col h-fit w-fit my-auto items-center m-auto">
       {ranking + 1}st
-      <button className="w-24 h-24">
-        <img src={`images/${userCharacter}.png`} alt="charimg" />
-      </button>
+      <img
+        className="w-24 h-24"
+        src={`images/${userCharacter}.png`}
+        alt="charimg"
+      />
       <span className="ml-4">
         {title}
         <button className="w-4" onClick={addPlaylist}>
