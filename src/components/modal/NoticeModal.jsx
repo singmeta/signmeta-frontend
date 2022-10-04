@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Modal from "../modal/modal.css";
-import { useNavigate } from "react-router-dom";
+import NoticeDetailModal from "components/modal/NoticeDetailModal";
 
 const NoticeModal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, header } = props;
   const [noticeList, setNoticeList] = useState([]);
-  const navigate = useNavigate();
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [itemID, setItemID] = useState("");
 
   useEffect(() => {
     loadNoticeList();
@@ -18,9 +20,8 @@ const NoticeModal = (props) => {
     });
   };
 
-  const handleNotice = () => {
-    console.log("gopod");
-    navigate(`/`);
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -35,7 +36,8 @@ const NoticeModal = (props) => {
             <div className="flex p-2" key={index}>
               <button
                 onClick={() => {
-                  navigate(`/`, { state: item._id });
+                  setModalOpen(true);
+                  setItemID(item._id);
                 }}
                 className="truncate justify-left flex_title title"
               >
@@ -49,6 +51,12 @@ const NoticeModal = (props) => {
           <button className="close mt-4" onClick={close}>
             close
           </button>
+          <NoticeDetailModal
+            open={modalOpen}
+            close={closeModal}
+            header={itemID}
+          ></NoticeDetailModal>
+
           <style>
             {`
           .title {
