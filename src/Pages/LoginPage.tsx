@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { save_id } from "../actions/UserIDAction";
+import Button from "components/Button";
 
 interface LoginInfo {
   email: FormDataEntryValue | null;
@@ -98,6 +99,15 @@ function LoginPage() {
                 </p>
               </div>
             </form>
+            <Button
+              clickHandler={function(): void {
+                alert("THING");
+              }}
+              label={"asd"}
+              size={"sm"}
+              backgroundColor={"white"}
+              color={"black"}
+            ></Button>
           </div>
         </div>
       </div>
